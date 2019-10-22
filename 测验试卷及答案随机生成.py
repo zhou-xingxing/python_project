@@ -1,4 +1,4 @@
-# 生成随机的10份测验试卷文件
+# 生成随机的10份测验试卷文件  问题是美国50个州的首府
 import random
 
 tmp={'Alabama': 'Montgomery', 'Alaska': 'Juneau', 'Arizona': 'Phoenix',
