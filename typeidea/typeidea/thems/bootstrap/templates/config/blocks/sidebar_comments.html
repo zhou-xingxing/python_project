@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>评论</title>
+</head>
+<body>
+<ul>
+    {% for comment in comments %}
+    <li>
+        <a href="{% url 'post-detail' comment.target.id %}">{{ comment.target.title }}</a>
+        {{ comment.nickname }} : {{ comment.content }}
+    </li>
+    {% endfor %}
+</ul>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>{% block title %}{% endblock %}-typeidea博客系统</title>
+</head>
+<body>
+<div>顶部分类：
+    {% for cate in navs %}
+    <a href="{% url 'category-list' cate.id %}">{{ cate.name }}</a>
+    {% endfor %}
+</div>
+<hr/>
+
+{% block main %}
+{% endblock %}
+
+<hr/>
+<div>侧边栏展示：
+    {% for sidebar in sidebars %}
+        <h4>{{ sidebar.title }}</h4>
+        内容：{{ sidebar.content_html }}
+    {% endfor %}
+</div>
+</body>
+</html>
