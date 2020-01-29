@@ -5,7 +5,8 @@ from django.shortcuts import get_object_or_404
 
 from config.models import SideBar
 from .models import Post, Tag, Category
-
+from comment.forms import CommentForm
+from comment.models import Comment
 # Create your views here.
 """
 function view
@@ -52,6 +53,7 @@ class CommonViewMixin:
         context = super().get_context_data(**kwargs)
         context.update({
             'sidebars': SideBar.get_all(),
+            'God':'热巴老公',
         })
         context.update(Category.get_navs())
         return context
@@ -101,6 +103,14 @@ class PostDetailView(CommonViewMixin, DetailView):
     template_name = 'blog/detail.html'
     context_object_name = 'post'
     pk_url_kwarg = 'post_id'
+
+    def get_context_data(self, **kwargs):
+        context=super().get_context_data(**kwargs)
+        context.update({
+            'comment_form':CommentForm,
+            'comment_list':Comment.get_by_target(self.request.path),
+        })
+        return context
 
 
 class SearchView(IndexView):

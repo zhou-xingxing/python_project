@@ -18,9 +18,9 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     {% for cate in navs %}
-                    <li class="nav-item">
+                    <ul class="nav-item">
                         <a class="nav-link" href="{% url 'category-list' cate.id %}">{{ cate.name }}</a>
-                    </li>
+                    </ul>
                     {% endfor %}
                 </ul>
                 <form class="form-inline " action="/search/" method="GET">
@@ -53,6 +53,13 @@
                     </div>
                     {% endfor %}
                 {% endblock %}
+                <hr/>
+                <div class="card sidebar">
+                    <div class="card-body">
+                        <h4 class="card-title"><a href="{% url 'link-list'  %}">友情链接</a></h4>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -69,7 +76,7 @@
 <!--        </nav>-->
 <!--    </div>-->
     <div class="container power">
-        <span class="text-muted" >Power by 泽神</span>
+        <span class="text-muted" >Power by {{ God }}</span>
     </div>
     {% endblock %}
 </footer>
