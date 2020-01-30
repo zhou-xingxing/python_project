@@ -1,7 +1,16 @@
 {% extends "./base.html" %}
+{% load comment_block %}
 
 {% block title %}
 {{ post.title }}
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet"
+      href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/googlecode.min.css">
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js">
+</script>
+<script>hljs.initHighlightingOnLoad();</script>
 {% endblock %}
 
 {% block main %}
@@ -14,31 +23,13 @@
     <hr/>
     <p>
         文章内容：
-        {{ post.content }}
+        <br/>
+        {% autoescape off %}
+        {{ post.content_html }}
+        {% endautoescape %}
     </p>
     {% endif %}
-<hr/>
-<div class="comment">
-    <form class="form-group" action="/comment/" method="POST">
-        {% csrf_token %}
-        <input name="target" type="hidden" value="{{ request.path }}"/>
-        {{ comment_form }}
-        <input type="submit" value="写好了"/>
-    </form>
-
-    <ul class="list-group">
-        {% for comment in comment_list %}
-        <li class="list-group-item">
-            <div class="nickname">
-                <span style="color:red;">{{ comment.nickname }}: </span><a href="{{ comment.website }}">{{ comment.website }}</a>
-                <span>{{ comment.created_time }}</span>
-            </div>
-            <div class="comment-content">
-                {{ comment.content }}
-            </div>
-        </li>
-        {% endfor %}
-    </ul>
-</div>
+<!--request.path就是target-->
+{% comment_block request.path %}
 {% endblock %}
 
